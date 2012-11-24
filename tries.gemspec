@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ['Manuel Meurer']
   gem.email         = 'manuel.meurer@gmail.com'
   gem.summary       = 'Solidify your code and retry on petty exceptions'
-  gem.description   = 'Retry your code multiple times on exceptions that might go away: 3.times on: Timeout::Error { call_api }'
+  gem.description   = 'Solidify your code and retry on petty exceptions'
   gem.homepage      = 'https://github.com/krautcomputing/tries'
 
   gem.files         = `git ls-files`.split($/)
