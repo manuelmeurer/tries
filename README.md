@@ -30,66 +30,74 @@ Or install it yourself as:
 
 ## Usage
 
-    3.tries on: Timeout::Error do
-      Mechanize.new.get 'https://www.google.com/'
-    end
+```ruby
+3.tries on: Timeout::Error do
+  Mechanize.new.get 'https://www.google.com/'
+end
+```
 
 ## Detailed usage
 
-    # Helper code to explain how it works
+```ruby
+# Helper code to explain how it works
 
-    FooError = Class.new(StandardError)
-    BarError = Class.new(StandardError)
+FooError = Class.new(StandardError)
+BarError = Class.new(StandardError)
 
-    @counter = 0
+@counter = 0
 
-    def method_that_raises_exception
-      @counter += 1
-      puts "Counter is #{@counter}"
+def method_that_raises_exception
+  @counter += 1
+  puts "Counter is #{@counter}"
 
-      case @counter
-      when 1 then raise FooError
-      when 2 then raise FooError
-      when 3 then raise BarError
-      when 4 then raise StandardError
-      end
+  case @counter
+  when 1 then raise FooError
+  when 2 then raise FooError
+  when 3 then raise BarError
+  when 4 then raise StandardError
+  end
 
-      puts 'You made it through!'
-    end
+  puts 'You made it through!'
+end
+```
 
-    # Rescue all errors
+```ruby
+# Rescue all errors
 
-    4.tries do
-      method_that_raises_exception
-    end
+4.tries do
+  method_that_raises_exception
+end
 
-    > Counter is 1
-    > Counter is 2
-    > Counter is 3
-    > Counter is 4
-    > Counter is 5
-    > You made it through!
+> Counter is 1
+> Counter is 2
+> Counter is 3
+> Counter is 4
+> Counter is 5
+> You made it through!
+```
 
-    # Rescue only certain errors
+```ruby
+# Rescue only certain errors
 
-    3.tries on: FooError do
-      method_that_raises_exception
-    end
+3.tries on: FooError do
+  method_that_raises_exception
+end
 
-    > Counter is 1
-    > Counter is 2
-    > Counter is 3
-    > BarError: BarError
+> Counter is 1
+> Counter is 2
+> Counter is 3
+> BarError: BarError
 
-    3.tries on: [FooError, BarError] do
-      method_that_raises_exception
-    end
+3.tries on: [FooError, BarError] do
+  method_that_raises_exception
+end
 
-    > Counter is 1
-    > Counter is 2
-    > Counter is 3
-    > Counter is 4
-    > StandardError: StandardError
+> Counter is 1
+> Counter is 2
+> Counter is 3
+> Counter is 4
+> StandardError: StandardError
+```
 
 ## Contributing
 
