@@ -44,19 +44,14 @@ Or install it yourself as:
     @counter = 0
 
     def method_that_raises_exception
-      @counter  += 1
-      message = "Counter is #{@counter}"
-      puts message
+      @counter += 1
+      puts "Counter is #{@counter}"
 
       case @counter
-      when 1
-        raise FooError
-      when 2
-        raise FooError
-      when 3
-        raise BarError
-      when 4
-        raise StandardError
+      when 1 then raise FooError
+      when 2 then raise FooError
+      when 3 then raise BarError
+      when 4 then raise StandardError
       end
 
       puts 'You made it through!'
