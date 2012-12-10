@@ -82,15 +82,10 @@ def raise_foo_foo_bar_bar_standard
   @error_counter += 1
 
   case @error_counter
-  when 1
-    raise FooError
-  when 2
-    raise FooError
-  when 3
-    raise BarError
-  when 4
-    raise BarError
-  when 5
-    raise StandardError
+  when 1 then raise FooError
+  when 2 then raise FooError
+  when 3 then raise BarError
+  when 4 then raise BarError
+  when 5 then raise StandardError
   end
 end
