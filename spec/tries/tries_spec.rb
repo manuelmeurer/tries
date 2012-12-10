@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tries do
   before do
-    @counter = 0
+    @error_counter = 0
   end
 
   context 'when retrying on all errors' do
@@ -79,9 +79,9 @@ FooError = Class.new(StandardError)
 BarError = Class.new(StandardError)
 
 def raise_foo_foo_bar_bar_standard
-  @counter  += 1
+  @error_counter += 1
 
-  case @counter
+  case @error_counter
   when 1
     raise FooError
   when 2
