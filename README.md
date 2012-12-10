@@ -44,13 +44,13 @@ end
 FooError = Class.new(StandardError)
 BarError = Class.new(StandardError)
 
-@counter = 0
+@error_counter = 0
 
 def method_that_raises_exception
-  @counter += 1
-  puts "Counter is #{@counter}"
+  @error_counter += 1
+  puts "Counter is #{@error_counter}"
 
-  case @counter
+  case @error_counter
   when 1 then raise FooError
   when 2 then raise FooError
   when 3 then raise BarError
@@ -63,40 +63,60 @@ end
 
 ```ruby
 # Rescue all errors
-
 4.tries do
   method_that_raises_exception
 end
 
-> Counter is 1
-> Counter is 2
-> Counter is 3
-> Counter is 4
-> Counter is 5
-> You made it through!
+=> Counter is 1
+=> Counter is 2
+=> Counter is 3
+=> Counter is 4
+=> Counter is 5
+=> You made it through!
 ```
 
 ```ruby
-# Rescue only certain errors
-
+# Rescue a specific error
 3.tries on: FooError do
   method_that_raises_exception
 end
 
-> Counter is 1
-> Counter is 2
-> Counter is 3
-> BarError: BarError
+=> Counter is 1
+=> Counter is 2
+=> Counter is 3
+=> BarError: BarError
+```
 
+```ruby
+# Rescue multiple errors
 3.tries on: [FooError, BarError] do
   method_that_raises_exception
 end
 
-> Counter is 1
-> Counter is 2
-> Counter is 3
-> Counter is 4
-> StandardError: StandardError
+=> Counter is 1
+=> Counter is 2
+=> Counter is 3
+=> Counter is 4
+=> StandardError: StandardError
+```
+
+```ruby
+# Delay execution after error
+# "delay" parameter is in seconds, fractions are possible
+4.tries delay: 1.5 do
+  method_that_raises_exception
+end
+
+=> Counter is 1
+waits 1.5 seconds...
+=> Counter is 2
+waits 1.5 seconds...
+=> Counter is 3
+waits 1.5 seconds...
+=> Counter is 4
+waits 1.5 seconds...
+=> Counter is 5
+=> You made it through!
 ```
 
 ## Contributing
