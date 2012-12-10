@@ -58,6 +58,21 @@ describe Tries do
       end.to raise_error(BarError)
     end
   end
+
+  context 'when specifying a delay' do
+    let(:delay) { 1.1 }
+
+    it 'sleeps the specified delay' do
+      Kernel.should_receive(:sleep).with(delay).exactly(2).times
+
+      begin
+        3.tries on: FooError, delay: delay do
+          raise_foo_foo_bar_bar_standard
+        end
+      rescue StandardError
+      end
+    end
+  end
 end
 
 FooError = Class.new(StandardError)
