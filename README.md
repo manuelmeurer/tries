@@ -4,7 +4,9 @@
 [![Dependency Status](https://gemnasium.com/krautcomputing/tries.png)](https://gemnasium.com/krautcomputing/tries)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/krautcomputing/tries)
 
-Solidify your code and retry on petty exceptions
+Solidify your code and retry on petty exceptions.
+
+Read the accompanying [blog post](http://www.krautcomputing.com/blog/2012/12/19/new-gem-tries/).
 
 ## Requirements
 
