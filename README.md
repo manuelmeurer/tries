@@ -119,6 +119,22 @@ waits 1.5 seconds...
 waits 1.5 seconds...
 => Counter is 5
 => You made it through!
+
+# you can also have an incremental "delay"
+4.tries delay: 1.5, incremental: true do
+  method_that_raises_exception
+end
+
+=> Counter is 1
+waits 1.5 seconds...
+=> Counter is 2
+waits 3 seconds...
+=> Counter is 3
+waits 4.5 seconds...
+=> Counter is 4
+waits 6 seconds...
+=> Counter is 5
+=> You made it through!
 ```
 
 ## Contributing
