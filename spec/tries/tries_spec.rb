@@ -72,6 +72,23 @@ describe Tries do
       rescue StandardError
       end
     end
+
+    context 'when setting incremental as true' do
+      let(:delay) { 1 }
+
+      it 'sleeps incrementally' do
+        Kernel.should_receive(:sleep).with(1).ordered
+        Kernel.should_receive(:sleep).with(2).ordered
+        Kernel.should_receive(:sleep).with(3).ordered
+
+        begin
+          3.tries on: [FooError, BarError], delay: delay, incremental: true do
+            raise_foo_foo_bar_bar_standard
+          end
+        rescue StandardError
+        end
+      end
+    end
   end
 end
 
