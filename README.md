@@ -146,6 +146,71 @@ waits 6 seconds...
 => You made it through!
 ```
 
+### Callback on error
+
+You can set a method or Proc to be called every time an exception occurs. Either set it globally in an initializer, e.g. to log all exceptions to a service like [Airbrake](https://airbrake.io/), or locally when calling `tries`. If both a global callback and a local callback are set, both are called, the global one first.
+
+#### Global callback
+
+```ruby
+# config/initializers/tries.rb
+Tries.configure do |config|
+  config.on_error = lambda do |exception, attempts, next_delay|
+    puts "Whow, a #{exception.class} just occurred! It was attempt nr. #{attempts} to do whatever I was doing."
+    if next_delay
+      puts "I'm gonna wait #{next_delay} seconds and try again."
+    else
+      puts "A delay was not configured so I'm gonna go for it again immediately."
+    end
+  end
+end
+```
+
+```ruby
+3.tries delay: 0.5, incremental: true do
+  method_that_raises_exception
+end
+
+=> Counter is 1
+=> Whow, a FooError just occurred! It was attempt nr. 1 to do whatever I was doing.
+=> I'm gonna wait 0.5 seconds and try again.
+waits 0.5 seconds...
+=> Counter is 2
+=> Whow, a FooError just occurred! It was attempt nr. 2 to do whatever I was doing.
+=> I'm gonna wait 1.0 seconds and try again.
+waits 1 second...
+=> Counter is 3
+=> Whow, a BarError just occurred! It was attempt nr. 3 to do whatever I was doing.
+=> I'm gonna wait 1.5 seconds and try again.
+waits 1.5 seconds...
+=> Counter is 4
+=> StandardError
+```
+
+#### Local callback
+
+```ruby
+callback = lambda do |exception, attempts, next_delay|
+  puts "Local callback! Exception: #{exception.class}, attempt: #{attempts}, next_delay: #{next_delay}"
+end
+
+3.tries delay: 0.5, incremental: true, on_error: callback do
+  method_that_raises_exception
+end
+
+=> Counter is 1
+=> Local callback! Exception: FooError, attempt: 1, next_delay: 0.5
+waits 0.5 seconds...
+=> Counter is 2
+=> Local callback! Exception: FooError, attempt: 2, next_delay: 1.0
+waits 1 second...
+=> Counter is 3
+=> Local callback! Exception: BarError, attempt: 3, next_delay: 1.5
+waits 1.5 seconds...
+=> Counter is 4
+=> StandardError
+```
+
 ## Contributing
 
 1. Fork it

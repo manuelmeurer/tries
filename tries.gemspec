@@ -25,4 +25,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.2'
   gem.add_development_dependency 'guard', '~> 1.6.2'
   gem.add_development_dependency 'guard-rspec', '~> 2.5.0'
+  gem.add_runtime_dependency 'gem_config', '~> 0.2.4'
 end

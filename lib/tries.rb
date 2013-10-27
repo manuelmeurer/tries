@@ -1,4 +1,13 @@
 require 'tries/version'
+require 'gem_config'
+
+module Tries
+  include GemConfig::Base
+
+  with_configuration do
+    has :on_error, classes: Proc
+  end
+end
 
 class Integer
   def tries(options = {}, &block)
@@ -9,8 +18,11 @@ class Integer
 
     begin
       return yield
-    rescue *exception_classes
-      Kernel.sleep calculate_delay(delay, attempts, incremental) if delay
+    rescue *exception_classes => exception
+      next_delay = calculate_delay(delay, attempts, incremental) if delay
+      Tries.configuration.on_error.call(exception, attempts, next_delay) if Tries.configuration.on_error
+      options[:on_error].call(exception, attempts, next_delay) if options[:on_error]
+      Kernel.sleep next_delay if delay
       retry if (attempts += 1) <= self
     end
 

@@ -90,6 +90,62 @@ describe Tries do
       end
     end
   end
+
+  context 'on_error' do
+    context 'when a global callback is set' do
+      it 'calls the global callback with the correct parameters' do
+        global_on_error = Proc.new {}
+        Tries.configure do |config|
+          config.on_error = global_on_error
+        end
+        global_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        global_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        global_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        begin
+          3.tries on: [FooError, BarError], delay: 0.1, incremental: true do
+            raise_foo_foo_bar_bar_standard
+          end
+        rescue StandardError
+        end
+      end
+    end
+
+    context 'when a local callback is set' do
+      it 'calls the local callback with the correct parameters' do
+        local_on_error = Proc.new {}
+        local_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        local_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        local_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        begin
+          3.tries on: [FooError, BarError], delay: 0.1, incremental: true, on_error: local_on_error do
+            raise_foo_foo_bar_bar_standard
+          end
+        rescue StandardError
+        end
+      end
+    end
+
+    context 'when both a global and a local callback are set' do
+      it 'calls both callbacks with the correct parameters in the correct order' do
+        local_on_error, global_on_error = Proc.new {}, Proc.new {}
+        global_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        local_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        global_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        local_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        global_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        local_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        Tries.configure do |config|
+          config.on_error = global_on_error
+        end
+        begin
+          3.tries on: [FooError, BarError], delay: 0.1, incremental: true, on_error: local_on_error do
+            raise_foo_foo_bar_bar_standard
+          end
+        rescue StandardError
+        end
+      end
+    end
+  end
 end
 
 FooError = Class.new(StandardError)
