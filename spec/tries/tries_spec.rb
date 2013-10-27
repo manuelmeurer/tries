@@ -60,26 +60,26 @@ describe Tries do
   end
 
   context 'when specifying a delay' do
-    let(:delay) { 1.1 }
+    let(:delay) { 0.1 }
 
-    it 'sleeps the specified delay' do
-      Kernel.should_receive(:sleep).with(delay).exactly(2).times
+    context 'static delay' do
+      it 'sleeps the specified delay' do
+        Kernel.should_receive(:sleep).with(0.1).exactly(2).times
 
-      begin
-        3.tries on: FooError, delay: delay do
-          raise_foo_foo_bar_bar_standard
+        begin
+          3.tries on: FooError, delay: delay do
+            raise_foo_foo_bar_bar_standard
+          end
+        rescue StandardError
         end
-      rescue StandardError
       end
     end
 
-    context 'when setting incremental as true' do
-      let(:delay) { 1 }
-
+    context 'incremental delay' do
       it 'sleeps incrementally' do
-        Kernel.should_receive(:sleep).with(1).ordered
-        Kernel.should_receive(:sleep).with(2).ordered
-        Kernel.should_receive(:sleep).with(3).ordered
+        Kernel.should_receive(:sleep).with(0.1).ordered
+        Kernel.should_receive(:sleep).with(0.2).ordered
+        Kernel.should_receive(:sleep).with(0.3).ordered
 
         begin
           3.tries on: [FooError, BarError], delay: delay, incremental: true do
