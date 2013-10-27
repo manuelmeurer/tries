@@ -21,10 +21,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r(^(test|spec|features)/))
   gem.require_paths = ['lib']
 
+  gem.add_development_dependency 'rake', '>= 0.9.0'
   gem.add_development_dependency 'rspec', '~> 2.13.0'
-  gem.add_development_dependency 'rake', '~> 10.0.1'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.2'
-  gem.add_development_dependency 'guard', '~> 1.6.2'
   gem.add_development_dependency 'guard-rspec', '~> 2.5.0'
   gem.add_runtime_dependency 'gem_config', '~> 0.2.4'
 end
