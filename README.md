@@ -41,9 +41,9 @@ end
 
 ## Detailed usage
 
-```ruby
-# Helper code to explain how it works
+### Helper code to explain how it works
 
+```ruby
 FooError = Class.new(StandardError)
 BarError = Class.new(StandardError)
 
@@ -64,8 +64,9 @@ def method_that_raises_exception
 end
 ```
 
+### Rescue all errors
+
 ```ruby
-# Rescue all errors
 4.tries do
   method_that_raises_exception
 end
@@ -78,8 +79,9 @@ end
 => You made it through!
 ```
 
+### Rescue a specific error
+
 ```ruby
-# Rescue a specific error
 3.tries on: FooError do
   method_that_raises_exception
 end
@@ -90,8 +92,9 @@ end
 => BarError: BarError
 ```
 
+### Rescue multiple errors
+
 ```ruby
-# Rescue multiple errors
 3.tries on: [FooError, BarError] do
   method_that_raises_exception
 end
@@ -103,9 +106,11 @@ end
 => StandardError: StandardError
 ```
 
+### Delay execution after error
+
+`delay` is in seconds, fractions are possible
+
 ```ruby
-# Delay execution after error
-# "delay" parameter is in seconds, fractions are possible
 4.tries delay: 1.5 do
   method_that_raises_exception
 end
@@ -120,8 +125,11 @@ waits 1.5 seconds...
 waits 1.5 seconds...
 => Counter is 5
 => You made it through!
+```
 
-# you can also have an incremental "delay"
+Incremental delay
+
+```ruby
 4.tries delay: 1.5, incremental: true do
   method_that_raises_exception
 end
