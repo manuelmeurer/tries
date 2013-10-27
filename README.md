@@ -89,7 +89,7 @@ end
 => Counter is 1
 => Counter is 2
 => Counter is 3
-=> BarError: BarError
+=> BarError
 ```
 
 ### Rescue multiple errors
@@ -103,12 +103,14 @@ end
 => Counter is 2
 => Counter is 3
 => Counter is 4
-=> StandardError: StandardError
+=> StandardError
 ```
 
 ### Delay execution after error
 
 `delay` is in seconds, fractions are possible
+
+#### Static delay
 
 ```ruby
 4.tries delay: 1.5 do
@@ -127,7 +129,7 @@ waits 1.5 seconds...
 => You made it through!
 ```
 
-Incremental delay
+#### Incremental delay
 
 ```ruby
 4.tries delay: 1.5, incremental: true do
