@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.summary       = 'Solidify your code and retry on petty exceptions'
   gem.description   = 'Solidify your code and retry on petty exceptions'
   gem.homepage      = 'https://github.com/krautcomputing/tries'
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r(^bin/)).map { |f| File.basename(f) }
