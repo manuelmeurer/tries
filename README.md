@@ -71,12 +71,12 @@ end
   method_that_raises_exception
 end
 
-=> Counter is 1
-=> Counter is 2
-=> Counter is 3
-=> Counter is 4
-=> Counter is 5
-=> You made it through!
+# => Counter is 1
+# => Counter is 2
+# => Counter is 3
+# => Counter is 4
+# => Counter is 5
+# => You made it through!
 ```
 
 ### Rescue a specific error
@@ -86,10 +86,10 @@ end
   method_that_raises_exception
 end
 
-=> Counter is 1
-=> Counter is 2
-=> Counter is 3
-=> BarError
+# => Counter is 1
+# => Counter is 2
+# => Counter is 3
+# => BarError
 ```
 
 ### Rescue multiple errors
@@ -99,11 +99,11 @@ end
   method_that_raises_exception
 end
 
-=> Counter is 1
-=> Counter is 2
-=> Counter is 3
-=> Counter is 4
-=> StandardError
+# => Counter is 1
+# => Counter is 2
+# => Counter is 3
+# => Counter is 4
+# => StandardError
 ```
 
 ### Delay execution after error
@@ -117,16 +117,16 @@ end
   method_that_raises_exception
 end
 
-=> Counter is 1
-waits 1.5 seconds...
-=> Counter is 2
-waits 1.5 seconds...
-=> Counter is 3
-waits 1.5 seconds...
-=> Counter is 4
-waits 1.5 seconds...
-=> Counter is 5
-=> You made it through!
+# => Counter is 1
+# waits 1.5 seconds...
+# => Counter is 2
+# waits 1.5 seconds...
+# => Counter is 3
+# waits 1.5 seconds...
+# => Counter is 4
+# waits 1.5 seconds...
+# => Counter is 5
+# => You made it through!
 ```
 
 #### Incremental delay
@@ -136,16 +136,16 @@ waits 1.5 seconds...
   method_that_raises_exception
 end
 
-=> Counter is 1
-waits 1.5 seconds...
-=> Counter is 2
-waits 3 seconds...
-=> Counter is 3
-waits 4.5 seconds...
-=> Counter is 4
-waits 6 seconds...
-=> Counter is 5
-=> You made it through!
+# => Counter is 1
+# waits 1.5 seconds...
+# => Counter is 2
+# waits 3 seconds...
+# => Counter is 3
+# waits 4.5 seconds...
+# => Counter is 4
+# waits 6 seconds...
+# => Counter is 5
+# => You made it through!
 ```
 
 ### Callback on error
@@ -173,20 +173,20 @@ end
   method_that_raises_exception
 end
 
-=> Counter is 1
-=> Whow, a FooError just occurred! It was attempt nr. 1 to do whatever I was doing.
-=> I'm gonna wait 0.5 seconds and try again.
-waits 0.5 seconds...
-=> Counter is 2
-=> Whow, a FooError just occurred! It was attempt nr. 2 to do whatever I was doing.
-=> I'm gonna wait 1.0 seconds and try again.
-waits 1 second...
-=> Counter is 3
-=> Whow, a BarError just occurred! It was attempt nr. 3 to do whatever I was doing.
-=> I'm gonna wait 1.5 seconds and try again.
-waits 1.5 seconds...
-=> Counter is 4
-=> StandardError
+# => Counter is 1
+# => Whow, a FooError just occurred! It was attempt nr. 1 to do whatever I was doing.
+# => I'm gonna wait 0.5 seconds and try again.
+# waits 0.5 seconds...
+# => Counter is 2
+# => Whow, a FooError just occurred! It was attempt nr. 2 to do whatever I was doing.
+# => I'm gonna wait 1.0 seconds and try again.
+# waits 1 second...
+# => Counter is 3
+# => Whow, a BarError just occurred! It was attempt nr. 3 to do whatever I was doing.
+# => I'm gonna wait 1.5 seconds and try again.
+# waits 1.5 seconds...
+# => Counter is 4
+# => StandardError
 ```
 
 #### Local callback
@@ -200,17 +200,17 @@ end
   method_that_raises_exception
 end
 
-=> Counter is 1
-=> Local callback! Exception: FooError, attempt: 1, next_delay: 0.5
-waits 0.5 seconds...
-=> Counter is 2
-=> Local callback! Exception: FooError, attempt: 2, next_delay: 1.0
-waits 1 second...
-=> Counter is 3
-=> Local callback! Exception: BarError, attempt: 3, next_delay: 1.5
-waits 1.5 seconds...
-=> Counter is 4
-=> StandardError
+# => Counter is 1
+# => Local callback! Exception: FooError, attempt: 1, next_delay: 0.5
+# waits 0.5 seconds...
+# => Counter is 2
+# => Local callback! Exception: FooError, attempt: 2, next_delay: 1.0
+# waits 1 second...
+# => Counter is 3
+# => Local callback! Exception: BarError, attempt: 3, next_delay: 1.5
+# waits 1.5 seconds...
+# => Counter is 4
+# => StandardError
 ```
 
 ## Contributing
