@@ -189,6 +189,17 @@ end
 # => StandardError
 ```
 
+A global callback also lets you effectively disable Tries in development environment:
+
+```ruby
+# config/initializers/tries.rb
+Tries.configure do |config|
+  config.on_error = lambda do |exception, attempts, next_delay|
+    raise exception if Rails.env.development?
+  end
+end
+```
+
 #### Local callback
 
 ```ruby
