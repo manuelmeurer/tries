@@ -7,15 +7,15 @@
 
 Solidify your code and retry on petty exceptions.
 
+Tries lets you retry a block of code multiple times, which is convenient for example when communicating with external APIs that might return an error the once second but work fine the next.
+
+You can specify exactly how often the block of code is retried and which exceptions are caught.
+
 Read the accompanying [blog post](http://www.krautcomputing.com/blog/2012/12/19/new-gem-tries/).
 
 ## Requirements
 
-Requires Ruby 1.9.2 or higher
-
-## Is it production ready?
-
-Yes! I have been using this code in numerous applications for several years.
+Ruby >= 1.9.2
 
 ## Installation
 
@@ -189,7 +189,7 @@ end
 # => StandardError
 ```
 
-A global callback also lets you effectively disable Tries in development environment:
+When using Rails, a global callback also lets you effectively disable Tries in development environment:
 
 ```ruby
 # config/initializers/tries.rb
