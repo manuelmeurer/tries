@@ -7,7 +7,7 @@
 
 Solidify your code and retry on petty exceptions.
 
-Tries lets you retry a block of code multiple times, which is convenient for example when communicating with external APIs that might return an error the once second but work fine the next.
+Tries lets you retry a block of code multiple times, which is convenient for example when communicating with external APIs that might return an error the one second but work fine the next.
 
 You can specify exactly how often the block of code is retried and which exceptions are caught.
 
