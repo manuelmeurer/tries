@@ -25,5 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec', '~> 2.13.0'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.2'
   gem.add_development_dependency 'guard-rspec', '~> 2.5.0'
+  # Listen >= 2.0.0 only works with Ruby >= 1.9.3
+  gem.add_development_dependency 'listen', '< 2.0.0' if RUBY_VERSION < '1.9.3'
   gem.add_runtime_dependency 'gem_config', '~> 0.2.4'
 end
