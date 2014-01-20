@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.version       = Tries::VERSION
   gem.platform      = Gem::Platform::RUBY
   gem.authors       = ['Manuel Meurer']
-  gem.email         = 'manuel.meurer@gmail.com'
+  gem.email         = 'manuel@krautcomputing.com'
   gem.summary       = 'Solidify your code and retry on petty exceptions'
   gem.description   = 'Solidify your code and retry on petty exceptions'
   gem.homepage      = 'https://github.com/krautcomputing/tries'
