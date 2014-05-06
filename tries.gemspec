@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.name          = 'tries'
   gem.version       = Tries::VERSION
   gem.platform      = Gem::Platform::RUBY
-  gem.authors       = ['Manuel Meurer']
+  gem.author        = 'Manuel Meurer'
   gem.email         = 'manuel@krautcomputing.com'
   gem.summary       = 'Solidify your code and retry on petty exceptions'
   gem.description   = 'Solidify your code and retry on petty exceptions'
@@ -21,10 +21,10 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r(^(test|spec|features)/))
   gem.require_paths = ['lib']
 
-  gem.add_development_dependency 'rake', '>= 0.9.0'
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '~> 2.13.0'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.2'
-  gem.add_development_dependency 'guard-rspec', '~> 2.5.0'
+  gem.add_development_dependency 'guard-rspec', '~> 2.5'
   # Listen >= 2.0.0 only works with Ruby >= 1.9.3
   gem.add_development_dependency 'listen', '< 2.0.0' if RUBY_VERSION < '1.9.3'
   gem.add_runtime_dependency 'gem_config', '~> 0.2'
