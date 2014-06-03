@@ -64,7 +64,7 @@ describe Tries do
 
     context 'static delay' do
       it 'sleeps the specified delay' do
-        Kernel.should_receive(:sleep).with(0.1).exactly(2).times
+        expect(Kernel).to receive(:sleep).with(0.1).exactly(2).times
 
         begin
           3.tries on: FooError, delay: delay do
@@ -77,9 +77,9 @@ describe Tries do
 
     context 'incremental delay' do
       it 'sleeps incrementally' do
-        Kernel.should_receive(:sleep).with(0.1).ordered
-        Kernel.should_receive(:sleep).with(0.2).ordered
-        Kernel.should_receive(:sleep).with(0.3).ordered
+        expect(Kernel).to receive(:sleep).with(0.1).ordered
+        expect(Kernel).to receive(:sleep).with(0.2).ordered
+        expect(Kernel).to receive(:sleep).with(0.3).ordered
 
         begin
           3.tries on: [FooError, BarError], delay: delay, incremental: true do
@@ -98,9 +98,9 @@ describe Tries do
         Tries.configure do |config|
           config.on_error = global_on_error
         end
-        global_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
-        global_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
-        global_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        expect(global_on_error).to receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        expect(global_on_error).to receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        expect(global_on_error).to receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
         begin
           3.tries on: [FooError, BarError], delay: 0.1, incremental: true do
             raise_foo_foo_bar_bar_standard
@@ -113,9 +113,9 @@ describe Tries do
     context 'when a local callback is set' do
       it 'calls the local callback with the correct parameters' do
         local_on_error = Proc.new {}
-        local_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
-        local_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
-        local_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        expect(local_on_error).to receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        expect(local_on_error).to receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        expect(local_on_error).to receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
         begin
           3.tries on: [FooError, BarError], delay: 0.1, incremental: true, on_error: local_on_error do
             raise_foo_foo_bar_bar_standard
@@ -128,12 +128,12 @@ describe Tries do
     context 'when both a global and a local callback are set' do
       it 'calls both callbacks with the correct parameters in the correct order' do
         local_on_error, global_on_error = Proc.new {}, Proc.new {}
-        global_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
-        local_on_error.should_receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
-        global_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
-        local_on_error.should_receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
-        global_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
-        local_on_error.should_receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        expect(global_on_error).to receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        expect(local_on_error).to receive(:call).with(an_instance_of(FooError), 1, 0.1).ordered
+        expect(global_on_error).to receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        expect(local_on_error).to receive(:call).with(an_instance_of(FooError), 2, 0.2).ordered
+        expect(global_on_error).to receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
+        expect(local_on_error).to receive(:call).with(an_instance_of(BarError), 3, 0.3).ordered
         Tries.configure do |config|
           config.on_error = global_on_error
         end

@@ -1,4 +1,4 @@
-guard 'rspec', cli: '--drb --profile', all_after_pass: false do
+guard 'rspec', all_on_start: true, all_after_pass: true do
   # Specs
   watch(%r(^spec/.+_spec\.rb$))
   watch('spec/spec_helper.rb')       { 'spec' }
