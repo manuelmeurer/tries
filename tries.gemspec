@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.email         = 'manuel@krautcomputing.com'
   gem.summary       = 'Solidify your code and retry on petty exceptions'
   gem.description   = 'Solidify your code and retry on petty exceptions'
-  gem.homepage      = 'https://github.com/krautcomputing/tries'
+  gem.homepage      = 'http://krautcomputing.github.io/tries'
   gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
