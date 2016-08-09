@@ -20,8 +20,9 @@ class Integer
       return yield
     rescue *exception_classes => exception
       next_delay = calculate_delay(delay, attempts, incremental) if delay
-      Tries.configuration.on_error.call(exception, attempts, next_delay) if Tries.configuration.on_error
-      options[:on_error].call(exception, attempts, next_delay) if options[:on_error]
+      [Tries.configuration.on_error, options[:on_error]].compact.each do |on_error_callback|
+        on_error_callback.call(exception, attempts, next_delay)
+      end
       Kernel.sleep next_delay if delay
       retry if (attempts += 1) <= self
     end
