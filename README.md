@@ -230,3 +230,7 @@ end
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Support
+
+If you like this project, consider [buying me a coffee](https://www.buymeacoffee.com/279lcDtbF)! :)
