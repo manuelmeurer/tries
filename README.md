@@ -10,8 +10,6 @@ Tries lets you retry a block of code multiple times, which is convenient for exa
 
 You can specify exactly how often the block of code is retried and which exceptions are caught.
 
-Read the accompanying [blog post](http://www.krautcomputing.com/blog/2012/12/19/new-gem-tries/).
-
 ## Requirements
 
 Ruby >= 1.9.2
