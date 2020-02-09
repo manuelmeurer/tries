@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/tries.png)](http://badge.fury.io/rb/tries)
 [![Build Status](https://secure.travis-ci.org/manuelmeurer/tries.png)](http://travis-ci.org/manuelmeurer/tries)
-[![Code Climate](https://codeclimate.com/github/manuelmeurer/tries.png)](https://codeclimate.com/github/manuelmeurer/tries)
 
 Solidify your code and retry on petty exceptions.
 
