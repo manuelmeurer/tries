@@ -11,7 +11,7 @@ You can specify exactly how often the block of code is retried and which excepti
 
 ## Requirements
 
-Ruby >= 1.9.2
+Tests run on Ruby >= 2.5 is tested, older versions might work as well.
 
 ## Installation
 
