@@ -33,8 +33,9 @@ class Integer
   end
 
   private
-  def calculate_delay(delay, attempts, incremental)
-    return delay unless incremental
-    (delay * attempts * 100).round.to_f / 100
-  end
+
+    def calculate_delay(delay, attempts, incremental)
+      return delay unless incremental
+      (delay * attempts * 100).round.to_f / 100
+    end
 end
