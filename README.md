@@ -50,8 +50,8 @@ def method_that_raises_exception
   puts "Counter is #{@error_counter}"
 
   case @error_counter
-  when 1 then raise FooError
-  when 2 then raise FooError
+  when 1 then raise FooError, 'retry'
+  when 2 then raise FooError, 'retry'
   when 3 then raise BarError
   when 4 then raise StandardError
   end
@@ -100,6 +100,19 @@ end
 # => Counter is 3
 # => Counter is 4
 # => StandardError
+```
+
+### Rescue error on condition
+
+```ruby
+3.tries if: ->(error) { error.message == 'retry' } do
+  method_that_raises_exception
+end
+
+# => Counter is 1
+# => Counter is 2
+# => Counter is 3
+# => BarError
 ```
 
 ### Delay execution after error

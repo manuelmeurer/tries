@@ -15,10 +15,12 @@ class Integer
     exception_classes = Array(options[:on] || StandardError)
     delay             = options[:delay]
     incremental       = options[:incremental]
+    condition         = options[:if]
 
     begin
       return yield
     rescue *exception_classes => exception
+      raise exception if condition && !condition.call(exception)
       next_delay = calculate_delay(delay, attempts, incremental) if delay
       [Tries.configuration.on_error, options[:on_error]].compact.each do |on_error_callback|
         on_error_callback.call(exception, attempts, next_delay)
